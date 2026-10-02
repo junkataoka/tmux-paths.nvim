@@ -1,0 +1,27 @@
+*tmux-paths.txt*  Pick paths/URLs from other tmux panes
+
+==============================================================================
+COMMANDS                                                   *tmux-paths*
+
+:TmuxPaths                                                 *:TmuxPaths*
+    Open a snacks.nvim picker listing file paths and URLs found in the
+    scrollback of other tmux panes. <CR> opens a file (jumping to `:line`
+    if present), opens URLs with |vim.ui.open()|, and opens a file picker
+    for directories.
+
+==============================================================================
+SETUP                                                      *tmux-paths-setup*
+>lua
+    require('tmux-paths').setup {
+      lines = 3000,      -- scrollback lines to scan per pane
+      scope = 'window',  -- 'window' | 'session'
+      show_urls = true,
+    }
+<
+==============================================================================
+API                                                        *tmux-paths-api*
+
+require('tmux-paths').pick()      Open the picker.
+require('tmux-paths').collect()   Return items { text, file?, url?, pos? }.
+
+ vim:tw=78:ts=8:ft=help:norl:
